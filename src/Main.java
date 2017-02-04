@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 import algorithm.Algorithm;
-import algorithm.DeuxApprox;
+import algorithm.Dominant;
 import graphics.GUI;
 import graphics.Panel;
 import instance.Cloud;
@@ -11,7 +11,7 @@ import instance.RandomCloud;
 public class Main {
 
 	public static void main(String args[]) {
-		
+		/*
 		ArrayList<ArrayList<Float>> performanceChart = new ArrayList<ArrayList<Float>>();
 		
 		ArrayList<Integer> numberOfCenters = new ArrayList<Integer>();
@@ -50,18 +50,18 @@ public class Main {
 		} catch (Exception e) {
 			System.out.println("Ca a foiré !");
 			e.printStackTrace();
-		}
-		/*
-		RandomCloud cloud = new RandomCloud(1000);
-		Instance instance = new Instance(cloud.getGraphe(), 100);
-		Algorithm deuxApprox = new DeuxApprox(instance);
+		}*/
 		
-		ArrayList<Integer> solution = deuxApprox.resoudre();
+		Cloud cloud = new RandomCloud(100);
+		Instance instance = new Instance(cloud.getGraphe(), 5);
+		Algorithm algorithme = new Dominant(instance);
 		
-		Panel panel = new Panel(cloud.getGraphe(), solution);
+		ArrayList<Integer> solution = algorithme.resoudre();
+		
+		Panel panel = new Panel(cloud.getGraphe(), solution, algorithme.getRayon());
 		GUI frame = new GUI(panel);
 		frame.setVisible(true);
-		*/
+		
 	}
 	
 }

@@ -25,19 +25,25 @@ public class Dominant extends Algorithm {
 		 * S'il n'y a plus de points à couvrir, on s'arrête et on renvoie k
 		 */
 		ArrayList<Float> distancesTriees = this.instance.getListeDistances();
-		for (Float distance: distancesTriees) {
-			ArrayList<Point> grapheLocal = this.instance.getGraphe();
+		for (int i = 0; i < distancesTriees.size(); i++) {
+			float distance = distancesTriees.get(i);
+			ArrayList<Point> grapheLocal = 
+					new ArrayList<Point>(this.instance.getGraphe());
+			this.centres = new ArrayList<Integer>();
 			
-			while (!grapheLocal.isEmpty() || 
-					this.centres.size() < this.instance.getNbCentres()) {
+			while ((!grapheLocal.isEmpty()) || 
+					(this.centres.size() < this.instance.getNbCentres())) {
+				System.out.println("Distance " + i);
 				ArrayList<ArrayList<Point>> pointsCercle = 
 					this.genererPointsDansCercle(distance, grapheLocal);
 				int index = this.getPlusGrandRecouvrement(pointsCercle);
-				if (index >= 0) {
+				System.out.println("Index : " + index);
+				if (index != -1) {
 					this.centres.add(
 							pointsCercle.get(index).get(0).getIndexInGraph());
 					this.enleverPoints(grapheLocal, pointsCercle.get(index));
 				} else {
+					System.out.println("Taille des centres : " + this.centres.size());
 					break;
 				}
 			}
@@ -46,11 +52,13 @@ public class Dominant extends Algorithm {
 					(this.centres.size() == this.instance.getNbCentres())) {
 				this.rayon = distance;
 				break;
-			} else {
-				continue;
 			}
 		}
-		return this.centres;
+		if (this.centres.size() == this.instance.getNbCentres()) {
+			return this.centres;
+		} else {
+			return new ArrayList<Integer>();
+		}
 	}
 
 	private ArrayList<ArrayList<Point>> genererPointsDansCercle(
@@ -59,15 +67,13 @@ public class Dominant extends Algorithm {
 		ArrayList<ArrayList<Point>> pointsDansCercle = 
 				new ArrayList<ArrayList<Point>>();
 		
-		for (int i = 0; i < graphe.size(); i++) {
-			Point point1 = graphe.get(i);
+		for (Point point1: graphe) {
 			ArrayList<Point> tmpPoints = new ArrayList<Point>();
 			tmpPoints.add(point1);
-			for (int j = 0; j < graphe.size(); j++) {
-				Point point2 = graphe.get(j);
+			for (Point point2: graphe) {
 				if ((this.instance.getDistance(point1.getIndexInGraph(), 
-						point2.getIndexInGraph()) < distance)
-						&& (i != j)) {
+						point2.getIndexInGraph()) <= distance)
+						&& !point1.equals(point2)) {
 					tmpPoints.add(point2);
 				}
 			}
@@ -88,7 +94,7 @@ public class Dominant extends Algorithm {
 				index = i;
 			}
 		}
-		
+		System.out.println("Plus grand recouvrement : " + plusGrandRecouvrement);
 		if (plusGrandRecouvrement > 1) {
 			return index;
 		} else {
@@ -99,7 +105,8 @@ public class Dominant extends Algorithm {
 	private void enleverPoints(ArrayList<Point> graphe,
 			ArrayList<Point> pointsRetires) {
 		for (Point point: pointsRetires) {
-			graphe.remove(graphe.indexOf(point));
+			int index = graphe.indexOf(point);
+			graphe.remove(index);
 		}
 	}
 	

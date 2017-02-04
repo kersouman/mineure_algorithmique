@@ -8,15 +8,20 @@ import javax.swing.JPanel;
 
 import instance.Point;
 
+@SuppressWarnings("serial")
 public class Panel extends JPanel {
 
 	private ArrayList<Point> graphe = new ArrayList<Point>();
 	private ArrayList<Integer> solution = new ArrayList<Integer>();
+	private float rayon = 0f;
 	
-	public Panel(ArrayList<Point> graphe, ArrayList<Integer> solution) {
+	public Panel(ArrayList<Point> graphe, 
+			ArrayList<Integer> solution,
+			float rayon) {
 		super();
 		this.graphe = graphe;
 		this.solution = solution;
+		this.rayon = rayon;
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -26,18 +31,25 @@ public class Panel extends JPanel {
 			g.fillOval((int) x, (int) y, 10, 10);
 		}
 		
-		for (int i = 0; i < this.solution.size(); i++) {
-			float x = this.graphe.get(this.solution.get(i)).getCoordX();
-			float y = this.graphe.get(this.solution.get(i)).getCoordY();
-			g.setColor(Color.red);
-			g.fillOval((int) x, (int) y, 10, 10);
-		}
-		
-		g.setColor(Color.green);
-		g.fillOval((int) this.graphe.get(this.solution.get(0)).getCoordX(), (int) this.graphe.get(this.solution.get(0)).getCoordY(), 10, 10);
-		g.setColor(Color.blue);
-		g.fillOval((int) this.graphe.get(this.solution.get(1)).getCoordX(), (int) this.graphe.get(this.solution.get(1)).getCoordY(), 10, 10);
+		if (!this.solution.isEmpty()) {
+			for (int i = 0; i < this.solution.size(); i++) {
+				float x = this.graphe.get(this.solution.get(i)).getCoordX();
+				float y = this.graphe.get(this.solution.get(i)).getCoordY();
+				g.setColor(Color.red);
+				g.fillOval((int) x, (int) y, 10, 10);
+				g.fillOval(((int)x)-(int)(Math.floor(rayon/2f)), ((int)y)-(int)(Math.floor(rayon/2f)), (int)Math.floor(rayon), (int)Math.floor(rayon));
+			}
 
+/*
+			g.setColor(Color.green);
+			g.fillOval((int) this.graphe.get(this.solution.get(0)).getCoordX(), 
+					(int) this.graphe.get(
+							this.solution.get(0)).getCoordY(), 10, 10);
+			g.setColor(Color.blue);
+			g.fillOval((int) this.graphe.get(this.solution.get(1)).getCoordX(),
+					(int) this.graphe.get(
+							this.solution.get(1)).getCoordY(), 10, 10);
+*/		}
 	}
 	
 }

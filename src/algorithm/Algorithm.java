@@ -3,7 +3,6 @@ package algorithm;
 import java.util.ArrayList;
 
 import instance.Instance;
-import instance.Point;
 
 public abstract class Algorithm {
 

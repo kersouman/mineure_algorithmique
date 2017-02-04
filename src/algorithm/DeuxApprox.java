@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import instance.Instance;
-import instance.Point;
 
 public class DeuxApprox extends Algorithm {
 

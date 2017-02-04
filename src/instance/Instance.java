@@ -2,6 +2,7 @@ package instance;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Instance {
 	
@@ -77,11 +78,8 @@ public class Instance {
 			}
 		}
 		
-		Float[] tmpArray = new Float[tmpList.size()];
-		tmpArray = tmpList.toArray(tmpArray);
-		Arrays.sort(tmpArray);
-		tmpList = new ArrayList<Float>(Arrays.asList(tmpArray));
-		
+		Collections.sort(tmpList);
+
 		return tmpList;
 	}
 	
