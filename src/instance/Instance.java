@@ -32,20 +32,6 @@ public class Instance {
 		}
 	}
 	
-	// Ne sert pas pour le moment
-	private float getMaxDistance(int i) {
-		float distMax = 0f;
-		ArrayList<Float> tmpDist = this.distances.get(i);
-		
-		for (int j = 0; j < this.graphe.size(); j++) {
-			float tmp = tmpDist.get(j);
-			if (tmp > distMax)
-				distMax = tmp;
-		}
-		
-		return distMax;
-	}
-	
 	// Pour un point, quel est le centre le plus proche ?
 	public int getCentreLePlusProche(int j, ArrayList<Integer> listeCentres) {
 		float distMin = Float.MAX_VALUE;
@@ -66,6 +52,10 @@ public class Instance {
 	
 	public ArrayList<Point> getGraphe() {
 		return this.graphe;
+	}
+	
+	public int getSizeGraph() {
+		return this.graphe.size();
 	}
 	
 	public int getNbCentres() {

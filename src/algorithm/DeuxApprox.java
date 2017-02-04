@@ -15,17 +15,15 @@ public class DeuxApprox extends Algorithm {
 	// Il faudra réaliser une copie de l'instance pour pas la bousiller si jamais on veut s'en resservir
 	
 	@Override
-	public ArrayList<Integer> resoudre() {
-		ArrayList<Integer> centres = new ArrayList<Integer>();
+	public ArrayList<Integer> resoudre() {		
+		int sizePb = this.instance.getSizeGraph();
+		this.centres.add((new Random()).nextInt(sizePb));
 		
-		int sizePb = this.instance.getGraphe().size();
-		centres.add((new Random()).nextInt(sizePb));
-		
-		while (centres.size() < this.instance.getNbCentres()) {
-			centres.add(this.getNouveauCentre(centres));
+		while (this.centres.size() < this.instance.getNbCentres()) {
+			this.centres.add(this.getNouveauCentre(this.centres));
 		}
 		
-		return centres;
+		return this.centres;
 	}
 
 	public int getNouveauCentre(ArrayList<Integer> indexCentres) {
@@ -33,7 +31,8 @@ public class DeuxApprox extends Algorithm {
 		int nouveauCentre = 0;
 		
 		for (int i = 0; i < instance.getGraphe().size(); i++) {
-			float tmp = instance.getDistance(i, instance.getCentreLePlusProche(i, indexCentres));
+			float tmp = instance.getDistance(i, 
+					instance.getCentreLePlusProche(i, indexCentres));
 			if (tmp > distMax) {
 				distMax = tmp;
 				nouveauCentre = i;
@@ -48,7 +47,8 @@ public class DeuxApprox extends Algorithm {
 		int sizePb = this.instance.getGraphe().size();
 		
 		for (int i = 0; i < sizePb; i++) {
-			int centreTmp = this.instance.getCentreLePlusProche(i, indexCentres);
+			int centreTmp = 
+					this.instance.getCentreLePlusProche(i, indexCentres);
 			float tmp = this.instance.getDistance(i, centreTmp);
 			//System.out.println(tmp);
 			if (tmp > distMax)

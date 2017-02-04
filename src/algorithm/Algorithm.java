@@ -7,7 +7,9 @@ import instance.Point;
 
 public abstract class Algorithm {
 
-	Instance instance;
+	protected Instance instance;
+	protected ArrayList<Integer> centres = new ArrayList<Integer>();
+	protected float rayon = 0f;
 	
 	public Algorithm(Instance instance) {
 		this.instance = instance;
@@ -16,4 +18,16 @@ public abstract class Algorithm {
 	public abstract ArrayList<Integer> resoudre();
 	public abstract float getMaxDistance(ArrayList<Integer> listeCentres);
 	
+	public ArrayList<Integer> getCentres() {
+		return this.centres;
+	}
+	
+	public float getRayon() {
+		return this.rayon;
+	}
+	
+	public Instance getInstance() {
+		return this.instance;
+	}
+
 }
