@@ -1,6 +1,7 @@
 package instance;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Instance {
 	
@@ -77,11 +78,20 @@ public class Instance {
 	
 	public ArrayList<Float> getListeDistances() {
 		ArrayList<Float> tmpList = new ArrayList<Float>();
+		
 		for (int i = 0; i < this.distances.size(); i++) {
 			for (int j = i; j < this.distances.get(i).size(); j++) {
-				tmpList.add(this.distances.get(i).get(j));
+				if (!tmpList.contains(this.distances.get(i).get(j))) {
+					tmpList.add(this.distances.get(i).get(j));
+				}
 			}
 		}
+		
+		Float[] tmpArray = new Float[tmpList.size()];
+		tmpArray = tmpList.toArray(tmpArray);
+		Arrays.sort(tmpArray);
+		tmpList = new ArrayList<Float>(Arrays.asList(tmpArray));
+		
 		return tmpList;
 	}
 	
