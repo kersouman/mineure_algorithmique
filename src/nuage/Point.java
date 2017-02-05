@@ -1,4 +1,4 @@
-package instance;
+package nuage;
 
 public class Point {
 
@@ -27,9 +27,9 @@ public class Point {
 	}
 	
 	public float getDistance(Point p1) {
-		float distX = this.getCoordX() - p1.getCoordX();
-		float distY = this.getCoordY() - p1.getCoordY();
-		return (float) Math.sqrt(distX*distX + distY*distY);
+		float diffX = this.getCoordX() - p1.getCoordX();
+		float diffY = this.getCoordY() - p1.getCoordY();
+		return (float) Math.sqrt(diffX*diffX + diffY*diffY);
 	}
 	
 }

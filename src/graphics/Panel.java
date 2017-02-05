@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import instance.Point;
+import nuage.Point;
 
 @SuppressWarnings("serial")
 public class Panel extends JPanel {
@@ -21,7 +21,6 @@ public class Panel extends JPanel {
 		super();
 		this.graphe = graphe;
 		this.solution = solution;
-		this.rayon = rayon;
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -37,7 +36,7 @@ public class Panel extends JPanel {
 				float y = this.graphe.get(this.solution.get(i)).getCoordY();
 				g.setColor(Color.red);
 				g.fillOval((int) x, (int) y, 10, 10);
-				g.fillOval(((int)x)-(int)(Math.floor(rayon/2f)), ((int)y)-(int)(Math.floor(rayon/2f)), (int)Math.floor(rayon), (int)Math.floor(rayon));
+				g.fillOval(((int)x)-(int)(Math.round(rayon)), ((int)y)-(int)(Math.round(rayon)), (int)Math.round(rayon)*2, (int)Math.round(rayon)*2);
 			}
 
 /*

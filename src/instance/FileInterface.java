@@ -1,3 +1,4 @@
+package instance;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,9 +9,15 @@ import java.util.ArrayList;
 
 public class FileInterface {
 
-	public static void generatePerformanceChart(ArrayList<ArrayList<Float>> performanceChart, ArrayList<Integer> numberOfCenters, String nameFile) throws FileNotFoundException, IOException {
+	public static void generatePerformanceChart(
+			ArrayList<ArrayList<Float>> performanceChart, 
+			ArrayList<Integer> numberOfCenters, String nameFile)
+					throws FileNotFoundException, IOException {
 		File fileToWrite = new File("./resources/" + nameFile);
-		BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileToWrite), "UTF-8"));
+		BufferedWriter bufferedWriter = 
+				new BufferedWriter(
+						new OutputStreamWriter(
+								new FileOutputStream(fileToWrite), "UTF-8"));
 		
 		String csv = "";
 		for (int i = 0; i < numberOfCenters.size(); i++) {

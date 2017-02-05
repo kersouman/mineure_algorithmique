@@ -3,7 +3,7 @@ package algorithm;
 import java.util.ArrayList;
 
 import instance.Instance;
-import instance.Point;
+import nuage.Point;
 
 public class Dominant extends Algorithm {
 
@@ -43,11 +43,11 @@ public class Dominant extends Algorithm {
 							pointsCercle.get(index).get(0).getIndexInGraph());
 					this.enleverPoints(grapheLocal, pointsCercle.get(index));
 				} else {
-					System.out.println("Taille des centres : " + this.centres.size());
+
 					break;
 				}
 			}
-			
+			System.out.println("Taille des centres : " + this.centres.size());
 			if (grapheLocal.isEmpty() && 
 					(this.centres.size() == this.instance.getNbCentres())) {
 				this.rayon = distance;
@@ -87,7 +87,7 @@ public class Dominant extends Algorithm {
 			ArrayList<ArrayList<Point>> graphes) {
 		int index = 0;
 		int plusGrandRecouvrement = 0;
-		
+
 		for (int i = 0; i < graphes.size(); i++) {
 			if (graphes.get(i).size() > plusGrandRecouvrement) {
 				plusGrandRecouvrement = graphes.get(i).size();
@@ -95,11 +95,10 @@ public class Dominant extends Algorithm {
 			}
 		}
 		System.out.println("Plus grand recouvrement : " + plusGrandRecouvrement);
-		if (plusGrandRecouvrement > 1) {
+		if (plusGrandRecouvrement > 0)
 			return index;
-		} else {
+		else
 			return -1;
-		}
 	}
 	
 	private void enleverPoints(ArrayList<Point> graphe,
@@ -111,9 +110,8 @@ public class Dominant extends Algorithm {
 	}
 	
 	@Override
-	public float getMaxDistance(ArrayList<Integer> listeCentres) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void getMaxDistance(ArrayList<Integer> listeCentres) {
+		// Déjà fixé dans la méthode resoudre
 	}
 
 }

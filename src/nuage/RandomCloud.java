@@ -1,4 +1,4 @@
-package instance;
+package nuage;
 
 public class RandomCloud extends Cloud {
 	

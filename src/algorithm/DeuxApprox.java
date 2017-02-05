@@ -25,7 +25,7 @@ public class DeuxApprox extends Algorithm {
 		return this.centres;
 	}
 
-	public int getNouveauCentre(ArrayList<Integer> indexCentres) {
+	private int getNouveauCentre(ArrayList<Integer> indexCentres) {
 		float distMax = 0f;
 		int nouveauCentre = 0;
 		
@@ -41,7 +41,7 @@ public class DeuxApprox extends Algorithm {
 		return nouveauCentre;
 	}
 	
-	public float getMaxDistance(ArrayList<Integer> indexCentres) {
+	public void getMaxDistance(ArrayList<Integer> indexCentres) {
 		float distMax = 0f;
 		int sizePb = this.instance.getGraphe().size();
 		
@@ -54,7 +54,7 @@ public class DeuxApprox extends Algorithm {
 				distMax = tmp;
 		}
 		
-		return distMax;
+		this.rayon = distMax;
 	}
 	
 }

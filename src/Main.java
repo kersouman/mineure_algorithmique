@@ -4,9 +4,9 @@ import algorithm.Algorithm;
 import algorithm.Dominant;
 import graphics.GUI;
 import graphics.Panel;
-import instance.Cloud;
 import instance.Instance;
-import instance.RandomCloud;
+import nuage.Cloud;
+import nuage.RandomCloud;
 
 public class Main {
 
@@ -53,12 +53,17 @@ public class Main {
 		}*/
 		
 		Cloud cloud = new RandomCloud(100);
-		Instance instance = new Instance(cloud.getGraphe(), 5);
+		//Cloud cloud = new ClusteredCloud(100, 5, 50);
+		Instance instance = new Instance(cloud.getGraphe(), 3);
 		Algorithm algorithme = new Dominant(instance);
 		
 		ArrayList<Integer> solution = algorithme.resoudre();
-		
-		Panel panel = new Panel(cloud.getGraphe(), solution, algorithme.getRayon());
+		/*
+		ArrayList<Integer> solution = new ArrayList<Integer>();
+		float rayon = 0f;
+		*/
+		Panel panel = new Panel(
+				cloud.getGraphe(), solution, algorithme.getRayon());
 		GUI frame = new GUI(panel);
 		frame.setVisible(true);
 		
