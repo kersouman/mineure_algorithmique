@@ -6,7 +6,7 @@ import graphics.GUI;
 import graphics.Panel;
 import instance.Instance;
 import nuage.Cloud;
-import nuage.RandomCloud;
+import nuage.SRUnitCloud;
 
 public class Main {
 
@@ -52,9 +52,10 @@ public class Main {
 			e.printStackTrace();
 		}*/
 		
-		Cloud cloud = new RandomCloud(100);
+		//Cloud cloud = new RandomCloud(100);
 		//Cloud cloud = new ClusteredCloud(100, 5, 50);
-		Instance instance = new Instance(cloud.getGraphe(), 3);
+		Cloud cloud = new SRUnitCloud(100, 5, 20);
+		Instance instance = new Instance(cloud.getGraphe(), 5);
 		Algorithm algorithme = new Dominant(instance);
 		
 		ArrayList<Integer> solution = algorithme.resoudre();
