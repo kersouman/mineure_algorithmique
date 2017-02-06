@@ -15,7 +15,7 @@ public abstract class Algorithm {
 	}
 	
 	public abstract ArrayList<Integer> resoudre();
-	public abstract void getMaxDistance(ArrayList<Integer> listeCentres);
+	public abstract float getMaxDistance(ArrayList<Integer> listeCentres);
 	
 	public ArrayList<Integer> getCentres() {
 		return this.centres;

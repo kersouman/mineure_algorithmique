@@ -13,17 +13,8 @@ public class Dominant extends Algorithm {
 
 	@Override
 	public ArrayList<Integer> resoudre() {
-		/*Principe
-		 * On trie la liste des distances par ordre croissant et on enlève les doublons
-		 * On prend une distance (en parcourant la liste dans l'ordre croissant)
-		 * On génère pour chaque point la liste des voisins à cette distance
-		 * On met dans les centres le point qui a la liste la plus grande
-		 * On ajoute l'index de tous les points couverts par ces centres dans une liste annexe
-		 * On régénère la liste des voisins, on fait l'intersection avec les points déjà couverts
-		 * On continue comme ça jusqu'à atteindre k
-		 * S'il reste encore des points une fois k atteint, on s'arrête et on passe à la distance suivante
-		 * S'il n'y a plus de points à couvrir, on s'arrête et on renvoie k
-		 */
+		if (this.instance.getNbCentres() > this.instance.getSizeGraph())
+			return new ArrayList<Integer>();
 		ArrayList<Float> distancesTriees = this.instance.getListeDistances();
 		for (int i = 0; i < distancesTriees.size(); i++) {
 			float distance = distancesTriees.get(i);
@@ -33,11 +24,9 @@ public class Dominant extends Algorithm {
 			
 			while ((!grapheLocal.isEmpty()) || 
 					(this.centres.size() < this.instance.getNbCentres())) {
-				System.out.println("Distance " + i);
 				ArrayList<ArrayList<Point>> pointsCercle = 
 					this.genererPointsDansCercle(distance, grapheLocal);
 				int index = this.getPlusGrandRecouvrement(pointsCercle);
-				System.out.println("Index : " + index);
 				if (index != -1) {
 					this.centres.add(
 							pointsCercle.get(index).get(0).getIndexInGraph());
@@ -47,7 +36,6 @@ public class Dominant extends Algorithm {
 					break;
 				}
 			}
-			System.out.println("Taille des centres : " + this.centres.size());
 			if (grapheLocal.isEmpty() && 
 					(this.centres.size() == this.instance.getNbCentres())) {
 				this.rayon = distance;
@@ -94,7 +82,6 @@ public class Dominant extends Algorithm {
 				index = i;
 			}
 		}
-		System.out.println("Plus grand recouvrement : " + plusGrandRecouvrement);
 		if (plusGrandRecouvrement > 0)
 			return index;
 		else
@@ -110,8 +97,9 @@ public class Dominant extends Algorithm {
 	}
 	
 	@Override
-	public void getMaxDistance(ArrayList<Integer> listeCentres) {
+	public float getMaxDistance(ArrayList<Integer> listeCentres) {
 		// Déjà fixé dans la méthode resoudre
+		return 0f;
 	}
 
 }
